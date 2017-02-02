@@ -85,7 +85,6 @@ void Game::initialize()
 	DEBUG_MSG(glGetString(GL_VERSION));
 
 	/* Vertices counter-clockwise winding */
-	/* Vertices counter-clockwise winding */
 	vertex[0].coordinate[0] = -0.5f;
 	vertex[0].coordinate[1] = -0.5f;
 	vertex[0].coordinate[2] = 0.0f;
@@ -118,7 +117,7 @@ void Game::initialize()
 	vertex[7].coordinate[1] = -0.5f;
 	vertex[7].coordinate[2] = -1.0f;
 
-	vertex[0].color[0] = 1.0f;
+	/*vertex[0].color[0] = 1.0f;
 	vertex[0].color[1] = 0.0f;
 	vertex[0].color[2] = 0.0f;
 	vertex[0].color[3] = 1.0f;
@@ -131,31 +130,18 @@ void Game::initialize()
 	vertex[2].color[0] = 1.0f;
 	vertex[2].color[1] = 0.0f;
 	vertex[2].color[2] = 0.0f;
-	vertex[2].color[3] = 0.0f;
+	vertex[2].color[3] = 0.0f;*/
 
-	vertex[0].texel[0] = -0.5f;
-	vertex[0].texel[1] = -0.5f;
+	vertex[0].texel[0] = 1.0f;
+	vertex[0].texel[1] = .6646f;
 
-	vertex[1].texel[0] = -0.5f;
+	vertex[1].texel[0] = -1.0f;
 	vertex[1].texel[1] = 0.5f;
 
 	vertex[2].texel[0] = 0.5f;
 	vertex[2].texel[1] = 0.5f;
 
-	vertex[3].texel[0] = 0.5f;
-	vertex[3].texel[1] = -0.5f;
-
-	vertex[4].texel[0] = -0.5f;
-	vertex[4].texel[1] = -0.5f;
-
-	vertex[5].texel[0] = -0.5f;
-	vertex[5].texel[1] = 0.5f;
-
-	vertex[6].texel[0] = 0.5f;
-	vertex[6].texel[1] = 0.5f;
-
-	vertex[7].texel[0] = 0.5f;
-	vertex[7].texel[1] = -0.5f;
+	
 
 
 	/*Index of Poly / Triangle to Draw */
@@ -231,6 +217,7 @@ void Game::initialize()
 		"in vec2 sv_texel;"
 		"out vec4 color;"
 		"out vec2 texel;"
+		"uniform mat4 sv_mvp;"
 		"void main() {"
 		"	color = sv_color;"
 		"	texel = sv_texel;"
@@ -263,8 +250,9 @@ void Game::initialize()
 		"out vec4 fColor;"
 		"void main() {"
 		"fColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);"
-		"fColor = texture(f_texture, texel.st);"
+	/*	"fColor = texture(f_texture, texel.st);"*/
 		/*"fColor = color;"*/
+		"	fColor = color + texture(f_texture, texel);"
 		"}"; //Fragment Shader Src
 
 	DEBUG_MSG("Setting Up Fragment Shader");
